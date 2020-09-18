@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2020 Micro Focus or one of its affiliates.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.github.uxaspects</groupId>
+    <artifactId>buildenv-node12-image</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>UXAspects Build Environment Image</name>
+    <description>Specifies the environment for building the UXAspects projects</description>
+    <url>https://github.com/UXAspects/buildenv-node12-image/</url>
+
+    <inceptionYear>2020</inceptionYear>
+
+    <parent>
+        <groupId>com.github.cafapi</groupId>
+        <artifactId>caf-common-parent</artifactId>
+        <version>2.0.0-63</version>
+    </parent>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>ashley-hunter</id>
+            <name>Ashley Hunter</name>
+            <email>ashley-glenn.hunter@microfocus.com</email>
+        </developer>
+        <developer>
+            <id>donna-marijne</id>
+            <name>Donna Worby</name>
+            <email>donna.worby@microfocus.com</email>
+        </developer>
+        <developer>
+            <id>AlastairMcKee</id>
+            <name>Alastair McKee</name>
+            <email>alastair.ian.mckee@microfocus.com</email>
+        </developer>
+        <developer>
+            <id>PearseMcMurray</id>
+            <name>Pearse McMurray</name>
+            <email>pearse.mcmurray@microfocus.com</email>
+        </developer>
+        <developer>
+            <id>dermot-hardy</id>
+            <name>Dermot Hardy</name>
+            <email>dermot.hardy@microfocus.com</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <copyrightYear>2020</copyrightYear>
+        <copyrightNotice>Copyright ${copyrightYear} Micro Focus or one of its affiliates.</copyrightNotice>
+        <dockerHubOrganization>uxaspects</dockerHubOrganization>
+        <dockerUXAspectsOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerUXAspectsOrg>
+        <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
+        <maven.install.skip>true</maven.install.skip>
+        <skipNexusStagingDeployMojo>true</skipNexusStagingDeployMojo>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.27.2</version>
+                <executions>
+                    <execution>
+                        <id>docker-build</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>docker-push</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>${dockerUXAspectsOrg}buildenv-node12${dockerProjectVersion}</name>
+                            <build>
+                                <dockerFileDir>.</dockerFileDir>
+                                <args>
+                                    <!-- Labels used for image tagging -->
+                                    <BUILD_NUMBER>${project.version}</BUILD_NUMBER>
+                                    <BUILD_DATE>${maven.build.timestamp}</BUILD_DATE>
+                                    <GIT_REPO>https://github.com/UXAspects/buildenv-image</GIT_REPO>
+                                    <GIT_BRANCH>${git.branch}</GIT_BRANCH>
+                                    <GIT_COMMIT>${git.revision}</GIT_COMMIT>
+
+                                    <!-- Enable internet access -->
+                                    <http_proxy>${env.HTTP_PROXY}</http_proxy>
+                                    <https_proxy>${env.HTTPS_PROXY}</https_proxy>
+                                    <no_proxy>${env.NO_PROXY}</no_proxy>
+                                </args>
+                            </build>
+                        </image>
+                    </images>
+                    <verbose>true</verbose>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <scm>
+        <connection>scm:git:https://github.com/UXAspects/buildenv-node12-image.git</connection>
+        <developerConnection>scm:git:https://github.com/UXAspects/buildenv-node12-image.git</developerConnection>
+        <url>https://github.com/UXAspects/buildenv-node12-image</url>
+    </scm>
+
+</project>
