@@ -23,7 +23,7 @@
 
     <groupId>com.github.uxaspects</groupId>
     <artifactId>buildenv-node12-image</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-4</version>
     <packaging>pom</packaging>
 
     <name>UXAspects Build Environment Image</name>
