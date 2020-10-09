@@ -34,10 +34,22 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | \
     tee /etc/apt/sources.list.d/yarn.list && \
     apt update && apt install yarn
 
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+    apt-key add - && \
+    echo "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | \
+    tee /etc/apt/sources.list.d/docker.list
+
+RUN apt update
+
 #
 # Install Cypress Dependencies (https://docs.cypress.io/guides/guides/continuous-integration.html#Dependencies)
 #
 RUN apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+
+#
+# Install Docker for Loki screen shot testing
+#
+RUN apt install -y docker-ce docker-ce-cli containerd.io
 
 #
 # Install Chrome (Required for automated tests)
