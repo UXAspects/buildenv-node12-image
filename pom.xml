@@ -74,7 +74,7 @@
     </developers>
 
     <properties>
-        <copyrightYear>2020</copyrightYear>
+        <copyrightYear>2021</copyrightYear>
         <copyrightNotice>Copyright ${copyrightYear} Micro Focus or one of its affiliates.</copyrightNotice>
         <dockerHubOrganization>uxaspects</dockerHubOrganization>
         <dockerUXAspectsOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerUXAspectsOrg>
