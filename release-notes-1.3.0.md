@@ -1,8 +1,5 @@
-!not-ready-for-release!
-
 #### Version Number
 ${version-number}
 
 #### New Features
-
-#### Known Issues
+- Adding support for Nx 12
