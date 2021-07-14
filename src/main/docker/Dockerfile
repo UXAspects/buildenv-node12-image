@@ -47,9 +47,9 @@ RUN apt update
 RUN apt install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 
 #
-# Install Docker for Loki screen shot testing
+# Install Docker for Loki visual regression testing and dependencies required for Nx and build tooling
 #
-RUN apt install -y docker-ce docker-ce-cli containerd.io
+RUN apt install -y docker-ce docker-ce-cli containerd.io build-essential
 
 #
 # Install Chrome (Required for automated tests)
