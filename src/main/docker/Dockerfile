@@ -15,9 +15,9 @@
 #
 
 #
-# Base on the standard Maven 3.5.3 image
+# Base on the standard Maven 3.8.4 image
 #
-FROM maven:3.5.3-jdk-8
+FROM maven:3.8.4-jdk-11
 
 #
 # Install Node.js (which includes npm)
