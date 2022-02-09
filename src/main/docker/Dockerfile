@@ -54,7 +54,9 @@ RUN apt install -y docker-ce docker-ce-cli containerd.io build-essential
 #
 # Install Chrome (Required for automated tests)
 #
-RUN wget http://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_83.0.4103.97-1_amd64.deb
+# Note: Google has phased out fetching a specific version of Chrome, which is why we're fetching from a mirror:
+# https://stackoverflow.com/questions/70752674/404-on-dl-google-com-for-stable-chrome
+RUN wget http://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_83.0.4103.97-1_amd64.deb
 RUN dpkg -i google-chrome-stable_83.0.4103.97-1_amd64.deb; apt-get -fy install
 
 #
